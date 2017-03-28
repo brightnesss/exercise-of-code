@@ -2,6 +2,13 @@
 
 // leetcode No.496 Next Greater Element I 
 
+/*
+ *	You are given two arrays (without duplicates) nums1 and nums2 where nums1’s elements are subset of nums2. 
+ *	Find all the next greater numbers for nums1's elements in the corresponding places of nums2. 
+ *	The Next Greater Number of a number x in nums1 is the first greater number to its right in nums2.
+ *	If it does not exist, output -1 for this number. 
+ */
+
 // 遍历每一个数，将它压栈，若之后遍历到的数比栈顶的数大，则栈顶的数找到了nextGreaterElement
 // 将其退栈
 

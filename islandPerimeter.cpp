@@ -2,6 +2,13 @@
 
 // leetcode No.463 Island Perimeter
 
+/*
+ *	You are given a map in form of a two-dimensional integer grid where 1 represents land and 0 represents water. Grid cells are connected 
+ *	horizontally/vertically (not diagonally). The grid is completely surrounded by water, and there is exactly one island (i.e., one or more connected 
+ *	land cells). The island doesn't have "lakes" (water inside that isn't connected to the water around the island). One cell is a square with side 
+ *	length 1. The grid is rectangular, width and height don't exceed 100. Determine the perimeter of the island.
+ */
+
 // surroundWater将该区域外围扩展一圈，扩展的区域全是“水”
 // linkCount计算每一个位置的四联通性，即若周围有“水”，则周长+1
 // 遍历所有区域，对是陆地的区域计算其周长
