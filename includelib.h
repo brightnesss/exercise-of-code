@@ -1,0 +1,11 @@
+#pragma once
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <map>
+#include <list>
+#include <iostream>
+#include <bitset>
+#include <sstream>
+#include <stack>
+#include <unordered_map>
