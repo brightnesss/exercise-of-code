@@ -1,4 +1,4 @@
-//leetcode No.Climbing Stairs 
+//leetcode No.70 Climbing Stairs 
 
 /*
  *	You are climbing a stair case. It takes n steps to reach to the top.
