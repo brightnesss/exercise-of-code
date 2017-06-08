@@ -11,8 +11,6 @@
  */
 
 
-
-
 bool isPalindrome(string s)
 {
 	if (s.empty()) return true;
@@ -44,6 +42,43 @@ bool isPalindrome(string s)
 				}
 				else return false;
 			}
+		}
+	}
+	return true;
+}
+
+// a better one
+int isalphanumeric(const char &a)
+{
+	if (a >= 48 && a <= 57) return 1; //数字
+	else if (a >= 65 && a <= 90) return 2; //字母
+	else if (a >= 97 && a <= 122) return 2;
+	else return 0; //非数字和字母
+}
+
+bool isPalindrome(string s)
+{
+	int begin(0), end(s.size() - 1);
+	int tmpa, tmpb;
+	while (begin <= end)
+	{
+		tmpa = isalphanumeric(s[begin]);
+		tmpb = isalphanumeric(s[end]);
+		if ((tmpa | tmpb) == 3) return false; //如果是一个数字和一个字母
+		else if (tmpa && tmpb)
+		{
+			//如果两个都是有效的
+			if (s[begin] == s[end] || abs(s[begin] - s[end]) == 32) //大小写字母也判定为相同的,例如'a'和'A'是一样的
+			{
+				++begin;
+				--end;
+			}
+			else return false;
+		}
+		else
+		{
+			if (!tmpa) ++begin;
+			if (!tmpb) --end;
 		}
 	}
 	return true;

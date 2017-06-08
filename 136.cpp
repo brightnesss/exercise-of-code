@@ -56,3 +56,12 @@ int singleNumber(vector<int>& nums)
 		return ans;
 	}
 }
+
+//后来发现int型可以直接进行异或(^)运算,会自动将其按位异或并显示为int型
+int singleNumber(vector<int>& nums)
+{
+	if (nums.empty()) return 0;
+	int ans = nums[0];
+	for (int i = 1;i != nums.size();++i) ans ^= nums[i];
+	return ans;
+}

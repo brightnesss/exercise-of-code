@@ -58,6 +58,7 @@ vector<string> generateParenthesis(int n)
 	return ans;
 }
 
+
 // a better one
 vector<string> generateParenthesis(int n) {
     vector<string> res;
@@ -66,7 +67,8 @@ vector<string> generateParenthesis(int n) {
 }
     
 void addingpar(vector<string> &v, string str, int n, int m){
-    if(n==0 && m==0) {
+    if(n==0 && m==0) 
+    {
         v.push_back(str);
         return;
     }

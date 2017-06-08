@@ -17,3 +17,19 @@ int climbStairs(int n)
 	for (int i = 3;i <= n;++i) ans.push_back(ans[i - 1] + ans[i - 2]);
 	return ans[n];
 }
+
+//又因为当前状态只和前两步状态相关,和斐波那契数列类似,可以只用两个变量保存
+int climbStairs(int n)
+{
+	if (n == 0) return 0;
+	else if (n == 1) return 1;
+	else if (n == 2) return 2;
+	int pre2(1),pre1(2),curr;
+	for (int i = 3;i <= n;++i) 
+	{
+		curr = pre2 + pre1;
+		pre2 = pre1;
+		pre1 = curr;
+	}
+	return curr;
+}
