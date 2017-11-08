@@ -22,7 +22,7 @@ int findMin(vector<int>& nums)
 		}
 		else
 		{
-			end = mid - 1;
+			end = mid;
 			mid = begin + (end - begin) / 2;
 		}
 	}

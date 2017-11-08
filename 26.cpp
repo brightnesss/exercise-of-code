@@ -26,3 +26,24 @@ int removeDuplicates(vector<int>& nums)
 	nums.erase(it, nums.end()); //删除后面的重复
 	return pos;
 }
+
+// 2017-11-06
+int removeDuplicates(vector<int>& nums)
+{
+	if (nums.empty()) return 0;
+	int i(1), j(0);
+	while (j < nums.size() - 1)
+	{
+		if (nums[j] == nums[j + 1])
+		{
+			++j;
+		}
+		else
+		{
+			nums[i] = nums[j + 1];
+			++i;
+			++j;
+		}
+	}
+	return i;
+}
