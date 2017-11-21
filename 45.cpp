@@ -44,11 +44,12 @@ int jump(vector<int>& nums)
  *	在保证步数最少的情况下,前进最远的距离
  *	reach是在当前步数step下能走的最远的距离
  *	nextReach是在step + 1情况下能走最远的距离
+ *	beginIndex是step步下的起始位置
  */
 int jump(vector<int>& nums)
 {
 	if (nums.size() <= 1) return 0;
-	int reach(nums[0]), i(0), step(1), beginIndex(0), nextReach(0);
+	int reach(nums[0]), step(1), beginIndex(0), nextReach(0);
 	while (true)
 	{
 		if (reach + 1 >= nums.size()) return step;
@@ -56,7 +57,7 @@ int jump(vector<int>& nums)
 		{
 			if (i + nums[i] > reach) nextReach = max(nextReach, i + nums[i]);
 		}
-		beginIndex = reach;
+		beginIndex = reach + 1; //reach是在step下能走的最远地方,则step+1的起始位置为beginIndex
 		reach = nextReach;
 		++step;
 	}

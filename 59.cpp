@@ -51,3 +51,72 @@ vector<vector<int>> generateMatrix(int n)
 	}
 	return ans;
 }
+
+
+//和54相似
+vector<vector<int>> generateMatrix(int n)
+{
+	vector<vector<int>> ans( n,vector<int>(n, 0) );
+	int num(1), count(0);
+	int lcol(0), rcol(n - 1), trow(1), brow(n - 1);
+	int i(0), j(0);
+	while (true)
+	{
+		if (num <= n*n)
+		{
+			while (j <= rcol)
+			{
+				ans[i][j] = num;
+				++num;
+				++j;
+			}
+			j -= 1;
+			i += 1;
+			rcol -= 1;
+		}
+		else break;
+
+		if (num <= n*n)
+		{
+			while (i <= brow)
+			{
+				ans[i][j] = num;
+				++num;
+				++i;
+			}
+			i -= 1;
+			j -= 1;
+			brow -= 1;
+		}
+		else break;
+
+		if (num <= n*n)
+		{
+			while (j >= lcol)
+			{
+				ans[i][j] = num;
+				++num;
+				--j;
+			}
+			j += 1;
+			i -= 1;
+			lcol += 1;
+		}
+		else break;
+
+		if (num <= n*n)
+		{
+			while (i >= trow)
+			{
+				ans[i][j] = num;
+				++num;
+				--i;
+			}
+			i += 1;
+			j += 1;
+			trow += 1;
+		}
+		else break;
+	}
+	return ans;
+}

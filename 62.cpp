@@ -17,9 +17,7 @@
 
 int uniquePaths(int m, int n)
 {
-	vector<vector<int>> vmap(m, vector<int>(n));
-	for (int i = 0;i != m;++i) vmap[i][0] = 1;
-	for (int i = 1;i != n;++i) vmap[0][i] = 1;
+	vector<vector<int>> vmap(m, vector<int>(n, 1));	//第一行和第一列都是1
 	for (int i = 1;i != m;++i)
 	{
 		for (int j = 1;j != n;++j)
