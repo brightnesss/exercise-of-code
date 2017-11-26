@@ -54,28 +54,30 @@ vector<vector<int>> combinationSum3(int k, int n)
 
 //应用backtracking的方法
 //效率确实会高很多
-void combineSum3(vector<vector<int>> &ans, vector<int> &tmp, int curr, int n)
+void subcombinationSum3(vector<int>& bin, int begin, vector<vector<int>>& ans, vector<int>& tmp, const int k, int n)
 {
-	if (curr == 0 && n == 0)
+	if (tmp.size() > k) return;	//当前数组大小大于k,返回
+	else if (tmp.size() == k&&n == 0)
 	{
+		//当前数组大小等于k且和为n,是我们想要的答案
 		ans.push_back(tmp);
 		return;
 	}
-	if (curr > 0)
+	if (n <= 0) return;	//当前数组内的和已经大于n了,返回
+
+	for (int i=begin;i!=bin.size();++i)
 	{
-		for (int i = tmp.empty() ? 1 : tmp.back() + 1;i != 10;++i)
-		{
-			tmp.push_back(i);
-			combineSum3(ans, tmp, curr - 1, n - i);
-			tmp.pop_back();
-		}
+		tmp.push_back(bin[i]);
+		subcombinationSum3(bin, i + 1, ans, tmp, k, n - bin[i]);
+		tmp.pop_back();
 	}
 }
 
 vector<vector<int>> combinationSum3(int k, int n)
 {
 	vector<vector<int>> ans;
+	vector<int> bin{ 1,2,3,4,5,6,7,8,9 };
 	vector<int> tmp;
-	combineSum3(ans, tmp, k, n);
+	subcombinationSum3(bin, 0, ans, tmp, k, n);
 	return ans;
 }

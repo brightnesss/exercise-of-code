@@ -36,3 +36,28 @@ void moveZeroes(vector<int>& nums)
 		--count;
 	}
 }
+
+/*
+ *	用一个数组记下当前位置之前有多少个0
+ *	则对于nums中每一个不为0的数,都只需要向前移动zeros[i]个位置就可以到达最终位置
+ *	最后用0把位置补上
+ */
+void moveZeroes(vector<int>& nums)
+{
+	vector<int> zeros(nums.size());
+	zeros[0] = nums[0] == 0 ? 1 : 0;
+	for (int i = 1;i < nums.size();++i)
+	{
+		if (nums[i] == 0) zeros[i] = zeros[i - 1] + 1;
+		else zeros[i] = zeros[i - 1];
+	}
+	int num = *zeros.rbegin();
+	for (int i = 0;i != nums.size();++i)
+	{
+		if (nums[i] != 0) nums[i - zeros[i]] = nums[i];
+	}
+	for (auto it = nums.rbegin();num > 0;++it,--num)
+	{
+		*it = 0;
+	}
+}

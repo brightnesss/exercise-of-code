@@ -19,17 +19,24 @@
  *	每次需要遍历一遍nums,复杂度为O(n);二分查找复杂度O(longn);故总复杂度为O(nlogn)
  */
 
+/*
+ *	这里的二分查找和一般的不一样
+ *	不再是对nums[index]比较,而是直接比较index
+ */
+
 int findDuplicate(vector<int>& nums)
 {
-	if (nums.empty()) return 0;
-	int low(1), high(nums.size() - 1);
-	while (low < high)
+	int begin(1), end(nums.size() - 1), mid, count;
+	while (begin < end)
 	{
-		int count(0);
-		int mid = low + (high - low) / 2;
-		for (int i = 0;i != nums.size();++i) if (nums[i] <= mid) ++count;
-		if (count <= mid) low = mid + 1;
-		else high = mid;
+		mid = (begin + end) / 2;	//不比较nums[mid],而是mid
+		count = 0;
+		for (int num : nums)
+		{
+			if (num <= mid) ++count;
+		}
+		if (count > mid) end = mid;
+		else begin = mid + 1;
 	}
-	return low;
+	return begin;
 }

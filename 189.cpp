@@ -18,3 +18,20 @@ void rotate(vector<int>& nums, int k)
 	for (int i = 0;i != k;++i) nums[(i + k) % nums.size()] = tmp[i];
 	return;
 }
+
+void rotate(vector<int>& nums, int k) 
+{
+    map<int,int> bin;
+    int index,len(nums.size());
+    if (k%len==0) return;
+    for (int i=0;i!=len;++i)
+    {
+        index=(i+k)%len;
+        bin[index]=nums[i];
+    }
+    for (map<int,int>::iterator it=bin.begin();it!=bin.end();++it)
+    {
+        nums[it->first]=it->second;
+    }
+    return;
+}
