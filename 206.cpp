@@ -43,3 +43,18 @@ ListNode* reverseList(ListNode* head)
 	}
 	return pre;
 }
+
+//和25相似
+ListNode* reverseList(ListNode* head) {
+    if (!head) return head;
+    ListNode *newHead=new ListNode(0),*cur(head),*next(cur->next);
+    newHead->next=head;
+    while(cur->next)
+    {
+        cur->next=next->next;
+        next->next=newHead->next;
+        newHead->next=next;
+        next=cur->next;
+    }
+    return newHead->next;
+}

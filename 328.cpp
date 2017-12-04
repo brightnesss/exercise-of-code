@@ -55,3 +55,34 @@ ListNode* oddEvenList(ListNode* head)
     odd->next = evenhead;
     return head;
 }
+
+ListNode* oddEvenList(ListNode* head)
+{
+	ListNode *oddHead, *evenHead;
+	if (head) oddHead = head;
+	else return head;
+	if (head->next) evenHead = head->next;
+	else return head;
+	head = evenHead->next;
+	ListNode *odd(oddHead), *even(evenHead);
+	bool isOdd(true);
+	while (head)
+	{
+		if (isOdd)
+		{
+			odd->next = head;
+			odd = odd->next;
+			isOdd = false;
+		}
+		else
+		{
+			even->next = head;
+			even = even->next;
+			isOdd = true;
+		}
+		head = head->next;
+	}
+	odd->next = evenHead;
+	even->next = NULL;
+	return oddHead;
+}

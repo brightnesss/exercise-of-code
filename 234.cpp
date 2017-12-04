@@ -41,3 +41,44 @@ bool isPalindrome(ListNode* head)
 	}
 	return true;
 }
+
+/*
+ *	翻转后一半的list,然后和前一半进行比较,若都相同,则说明是回文,否则不是
+ */
+ListNode* reverseList(ListNode* head) 
+{
+	if (!head) return head;
+	ListNode *newHead = new ListNode(0), *cur(head), *next(cur->next);
+	newHead->next = head;
+	while (cur->next)
+	{
+		cur->next = next->next;
+		next->next = newHead->next;
+		newHead->next = next;
+		next = cur->next;
+	}
+	return newHead->next;
+}
+
+bool isPalindrome(ListNode* head)
+{
+	if (!(head&&head->next)) return true;
+	ListNode *slow(head), *fast(head);
+	while (fast->next&&fast->next->next)
+	{
+		slow = slow->next;
+		fast = fast->next->next;
+	}
+	slow->next = reverseList(slow->next);
+	fast = slow->next, slow = head;
+	while (fast)
+	{
+		if (slow->val == fast->val)
+		{
+			slow = slow->next;
+			fast = fast->next;
+		}
+		else return false;
+	}
+	return true;
+}
