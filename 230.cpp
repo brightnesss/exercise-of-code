@@ -35,3 +35,28 @@ int kthSmallest(TreeNode* root, int k)
 		}
 	}
 }
+
+int kthSmallest(TreeNode* root, int k)
+{
+	int cur(0);
+	stack<pair<TreeNode*, bool>> tree;
+	tree.push(make_pair(root, false));
+	pair<TreeNode*,bool> top;
+	while (!tree.empty())
+	{
+		top = tree.top();
+		tree.pop();
+		if (top.second)
+		{
+			cur += 1;
+			if (cur == k) return top.first->val;
+ 		}
+		else
+		{
+			if (top.first->right) tree.push(make_pair(top.first->right, false));
+			top.second = true;
+			tree.push(top);
+			if (top.first->left) tree.push(make_pair(top.first->left, false));
+		}
+	}
+}

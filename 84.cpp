@@ -27,8 +27,9 @@ int combineLargestRectangleArea(vector<int>& heights, int s, int m, int e)
 		else
 		{
 			//若两边都没到头
-			if (heights[left-1] > heights[right+1]) --left;	//注意这里一定要是left-1和right+1比较
-			else ++right;
+			//向外侧高的那一端移动
+			if (heights[left-1] > heights[right+1]) --left;	//注意这里一定要是left-1和right+1比较,left-1比right高,left移动
+			else ++right;	//否则right移动
 		}
 	}
 	return area;
@@ -81,7 +82,7 @@ int largestRectangleArea(vector<int> &height)
 {
     int area = 0;
     stack<int> stk;
-    for(int i = 0; i < height.size(); i ++)
+    for(int i = 0; i < height.size(); ++i)
     {
         if(stk.empty() || stk.top() <= height[i])
             stk.push(height[i]);
@@ -94,19 +95,18 @@ int largestRectangleArea(vector<int> &height)
                 area = max(area, stk.top()*count);
                 stk.pop();
             }
-            while(count --)
-                stk.push(height[i]);
+            while(count--) stk.push(height[i]);
             stk.push(height[i]);
         }
     }
     //此时栈里都是升序的
     //此时也可以通过在height后加一个0,来通过上面的循环就把所有的情况解决了,因为高度最低不会小于1
-    int count = 1;
+    int count = 1;	//因为stack是从后往前的,所以count从1开始;若是从前往后,则count应该从height.size()开始往下减,如1中所说
     while(!stk.empty())
     {
         area = max(area, stk.top()*count);
         stk.pop();
-        count ++;
+        ++count;
     }
     return area;
 }
