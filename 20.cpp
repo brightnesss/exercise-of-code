@@ -25,3 +25,20 @@ bool isValid(string s)
 	if (bin.empty()) return true;
 	else return false;
 }
+
+bool isValid(string s)
+{
+	stack<char> bin;
+	for (int i = 0;i != s.size();++i)
+	{
+		if (s[i] == '(' || s[i] == '[' || s[i] == '{') bin.push(s[i]);
+		else
+		{
+			if (bin.empty()) return false;
+			char top = bin.top();
+			if (s[i] == ')'&&top == '(' || s[i] == ']'&&top == '[' || s[i] == '}'&&top == '{') bin.pop();
+			else return false;
+		}
+	}
+	return bin.empty();
+}

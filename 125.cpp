@@ -83,3 +83,25 @@ bool isPalindrome(string s)
 	}
 	return true;
 }
+
+//第二次写的时候的方法
+bool isPalindrome(string s)
+{
+	int index(0), end(0);
+	while (index < s.size())
+	{
+		char c = s[index];
+		if (c >= 'a'&&c <= 'z' || c >= 'A'&&c <= 'Z' || c >= '0'&&c <= '9')
+		{
+			if (c >= 'a'&&c <= 'z') c = c - 'a' + 'A';
+			s[end] = c;
+			++index;
+			++end;
+		}
+		else ++index;
+	}
+	s = s.substr(0, end);
+	string sreverse = s;
+	reverse(sreverse.begin(), sreverse.end());
+	return s == sreverse;
+}

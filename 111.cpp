@@ -12,7 +12,7 @@ int depth(TreeNode* root)
 	{
 		int l = depth(root->left);
 		int r = depth(root->right);
-		if (root->left && root->right) return l > r ? r + 1 : l + 1;
+		if (root->left && root->right) return min(l,r) + 1;
 		else if (root->left) return l + 1;
 		else return  r + 1;
 	}
@@ -22,4 +22,13 @@ int depth(TreeNode* root)
 int minDepth(TreeNode* root)
 {
 	return depth(root);
+}
+
+int minDepth(TreeNode* root) 
+{
+    if (!root) return 0;
+    if (root->left&&root->right) return min(minDepth(root->left),minDepth(root->right))+1;
+    else if (root->left) return minDepth(root->left)+1;
+    else if (root->right) return minDepth(root->right)+1;
+    else return 1;
 }

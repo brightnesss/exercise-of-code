@@ -58,3 +58,50 @@ bool wordPattern(string pattern,string str)
 	}
 	return count==len;
 }
+
+bool wordPattern(string pattern, string str) 
+{
+	map<char, string> m;
+	set<string> sset;
+	int index(0), begin(0), end(0);
+	string s;
+	while (end != string::npos)
+	{
+		begin = str.find_first_not_of(' ', end);
+		end = str.find_first_of(' ', begin);
+		if (end != string::npos) s = str.substr(begin, end - begin);
+		else s = str.substr(begin);
+		if (sset.find(s) == sset.end())
+		{
+			sset.insert(s);
+			if (m.find(pattern[index]) == m.end()) m[pattern[index]] = s;
+			if (m[pattern[index++]] == s) continue;
+			else return false;
+		}
+		else
+		{
+			if (m.find(pattern[index]) == m.end()) return false;
+			if (m[pattern[index++]] == s) continue;
+			else return false;
+		}
+	}
+	return pattern.size()==index;
+}
+
+bool wordPattern(string pattern, string str)
+{
+	map<char, int> mchar;
+	map<string, int> mstring;
+	int index(0), begin(0), end(0);
+	string s;
+	while (end != string::npos)
+	{
+		begin = str.find_first_not_of(' ', end);
+		end = str.find_first_of(' ', begin);
+		if (end != string::npos) s = str.substr(begin, end - begin);
+		else s = str.substr(begin);
+		if (index == pattern.size() || mchar[pattern[index]] != mstring[s]) return false;
+		else mchar[pattern[index]] = mstring[s] = index++;
+	}
+	return index == pattern.size();
+}

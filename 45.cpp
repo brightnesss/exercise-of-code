@@ -62,3 +62,22 @@ int jump(vector<int>& nums)
 		++step;
 	}
 }
+
+int jump(vector<int>& nums) 
+{
+    int ans(0),len(nums.size());
+    int nextreach(0),reach(0);
+    int i(0);
+    while(i<len)
+    {
+        if (reach+1>=len) return ans;
+        ++ans;
+        while(i<len&&i<=reach)
+        {
+            nextreach=max(nextreach,i+nums[i]);
+            ++i;
+        }
+        reach=nextreach;
+    }
+    return -1;
+}

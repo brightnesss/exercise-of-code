@@ -50,3 +50,36 @@ bool hasPathSum(TreeNode* root, int sum)
 	}
 	return false;
 }
+
+/*
+ *	采用广度优先搜索
+ *	若某一个结点既无左子树也无右子树,则它为叶子结点,若此时它的值等于sum,则说明存在这一条路径
+ *	若一棵树有左子树或右子树,则将他的左子树和右子树的值分别加上他自身的值,并将子树压入队列中
+ */
+bool hasPathSum(TreeNode* root, int sum)
+{
+	if (!root) return false;
+	queue<TreeNode*> bin;
+	bin.push(root);
+	TreeNode *front;
+	while (!bin.empty())
+	{
+		front = bin.front();
+		bin.pop();
+		if (front->left == NULL&&front->right == NULL)
+		{
+			if (front->val == sum) return true;
+		}
+		if (front->left)
+		{
+			front->left->val += front->val;
+			bin.push(front->left);
+		}
+		if (front->right)
+		{
+			front->right->val += front->val;
+			bin.push(front->right);
+		}
+	}
+	return false;
+}

@@ -1,3 +1,4 @@
+
 // leetcode No.226 Invert Binary Tree
 
 //考非递归的树遍历？
@@ -26,5 +27,14 @@ TreeNode* invertTree(TreeNode* root)
 			if (top->right) binTree.push(top->right);
 		}
 	}
+	return root;
+}
+
+TreeNode* invertTree(TreeNode* root)
+{
+	if (!root) return root;
+	swap(root->left, root->right);
+	if (root->left) invertTree(root->left);
+	if (root->right) invertTree(root->right);
 	return root;
 }

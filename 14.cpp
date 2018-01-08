@@ -47,3 +47,32 @@ string longestCommonPrefix(vector<string>& strs)
 	}
 	return shortestStr;
 }
+
+//另一种方法
+//不过效率好像一样
+string subLongestCommonPrefix(string s, string prefix)
+{
+	int ps(0), pp(0);
+	while (ps < s.size() && pp < prefix.size())
+	{
+		if (s[ps] == prefix[pp])
+		{
+			++ps;
+			++pp;
+		}
+		else break;
+	}
+	return prefix.substr(0, pp);
+}
+
+string longestCommonPrefix(vector<string>& strs)
+{
+	if (strs.empty()) return "";
+	string prefix(strs[0]);
+	for (int i = 1;i != strs.size();++i)
+	{
+		prefix = subLongestCommonPrefix(strs[i], prefix);
+		if (prefix == "") break;
+	}
+	return prefix;
+}

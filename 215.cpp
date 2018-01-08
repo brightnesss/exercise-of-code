@@ -47,3 +47,33 @@ int findKthLargest(vector<int>& nums, int k)
     for (int i = 0; i < k - 1; i++) pq.pop(); 
     return pq.top();
 }
+
+/*
+ *	二刷快速排序,感觉比第一次好一点
+ *	返回值就是答案
+ *	index是第k大的数应该在nums中排序的位置,即index=nums.size()-k
+ */
+int subFindKthLargest(vector<int>& nums, const int index, int begin, int end)
+{
+	int pivot(nums[begin]);
+	int i(begin), j(end - 1);
+	while (i < j)
+	{
+		while (i < j&&nums[j] >= pivot) --j;
+		nums[i] = nums[j];
+		while (i < j&&nums[i] <= pivot) ++i;
+		nums[j] = nums[i];
+	}
+	nums[i] = pivot;
+	if (i == index) return nums[i];	//若观察哨的位置就是index,说明我们找到了,返回
+	else if (i > index) return subFindKthLargest(nums, index, begin, i);	//若观察哨位置大于index,说明index在左半部分
+	else return subFindKthLargest(nums, index, i + 1, end);	//index在右半部分
+}
+
+int findKthLargest(vector<int>& nums, int k)
+{
+	int len(nums.size());
+	int index(len - k);
+	int ans = subFindKthLargest(nums, index, 0, len);
+	return ans;
+}

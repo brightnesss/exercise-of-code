@@ -26,4 +26,20 @@ int addDigits(int num)
 	return numAdd;
 }
 
+//第二次刷
+int addDigits(int num) 
+{
+    int nextnum(0);
+    while(num>9)
+    {
+        while(num!=0)
+        {
+            nextnum+=num%10;
+            num/=10;
+        }
+        swap(num,nextnum);
+    }
+    return num;
+}
+
 //如何达到O(1)的复杂度还没有想到

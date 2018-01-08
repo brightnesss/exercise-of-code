@@ -34,3 +34,18 @@ vector<int> singleNumber(vector<int>& nums, int version = 3)
 	ans = { ans1,ans2 };
 	return ans;
 }
+
+//时间复杂度O(n),空间复杂度O(n/2)
+vector<int> singleNumber(vector<int>& nums) 
+{
+    vector<int> ans;
+    if (nums.empty()) return ans;
+    unordered_set<int> uset;
+    for (int num:nums)
+    {
+        if (uset.find(num)!=uset.end()) uset.erase(num);
+        else uset.insert(num);
+    }
+    for (int num:uset) ans.push_back(num);
+    return ans;
+}

@@ -15,9 +15,10 @@
  *	You should return [1, 3, 4].
  */
 
+//把每一层所有的值都记下来,并返回最后一个值(最后一个值是这一层最右边的值)
 vector<int> rightSideView(TreeNode* root)
 {
-	//把每一层所有的值都记下来,并返回最后一个值(最后一个值是这一层最右边的值)
+
 	if (!root) return vector<int>();
 	vector<int> ans;
 	queue<pair<TreeNode*,bool>> bin;
@@ -46,6 +47,32 @@ vector<int> rightSideView(TreeNode* root)
 	}
 	return ans;
 }
+//优化一下以上的写法
+vector<int> rightSideView(TreeNode* root)
+{
+	if (!root) return vector<int>{};
+	vector<int> ans, layer;
+	queue<TreeNode*> q;
+	q.push(root);
+	TreeNode *front;
+	int len;
+	while (!q.empty())
+	{
+		len = q.size();
+		layer.clear();
+		for (int i = 0;i != len;++i)
+		{
+			front = q.front();
+			q.pop();
+			layer.push_back(front->val);
+			if (front->left) q.push(front->left);
+			if (front->right) q.push(front->right);
+		}
+		ans.push_back(layer.back());
+	}
+	return ans;
+}
+
 
 /*
  *	maybe a better way

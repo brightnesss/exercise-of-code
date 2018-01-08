@@ -47,3 +47,28 @@ vector<vector<int>> combine(int n, int k)
 	combine(ans, vector<int>(), k, n, 0);
 	return ans;
 }
+
+//二刷,写出来的还是差不多的代码...
+void subCombine(vector<vector<int>> &ans, vector<int> &num, const int n, int k, int end)
+{
+	if (k == 0)
+	{
+		ans.push_back(num);
+		return;
+	}
+	int begin = end + 1;
+	for (int i = begin;i <= n - k + 1;++i)
+	{
+		num.push_back(i);
+		subCombine(ans, num, n, k - 1, i);
+		num.pop_back();
+	}
+}
+
+vector<vector<int>> combine(int n, int k)
+{
+	vector<vector<int>> ans;
+	vector<int> num;
+	subCombine(ans, num, n, k, 0);
+	return ans;
+}
